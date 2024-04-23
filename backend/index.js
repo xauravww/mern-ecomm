@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config()
 const connectDB = require('./config/db')
 const router = require('./routes')
+const { job } = require('./cron')
 
+job.start()
 
 const app = express()
 app.use(cors({
