@@ -4,7 +4,9 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config()
 const connectDB = require('./config/db')
 const router = require('./routes')
+const { job } = require('./cron')
 
+job.start()
 
 const app = express()
 const corsOptions = {
@@ -22,8 +24,12 @@ app.use(cookieParser())
 
 app.use("/api",router)
 
-const PORT = 8080 || process.env.PORT
+const PORT =  process.env.PORT || 8080
 
+
+app.get("/",(req,res)=>{
+res.json({result:'success',message:"Server is running successfully"})
+})
 
 connectDB().then(()=>{
     app.listen(PORT,()=>{
