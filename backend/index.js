@@ -7,10 +7,16 @@ const router = require('./routes')
 
 
 const app = express()
+const corsOptions = {
+    origin: 'http://127.0.0.1:5500',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+};
 app.use(cors({
-    origin : process.env.FRONTEND_URL,
-    credentials : true
-}))
+    credentials:true,
+    origin: ['http://localhost:5500','http://127.0.0.1:5500','http://localhost:3000','https://mern-ecomm-backend-gi43.onrender.com']
+    }));
 app.use(express.json())
 app.use(cookieParser())
 
